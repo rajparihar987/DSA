@@ -1,0 +1,58 @@
+How to identify DIGIT DP problem....
+
+1. Range will be given [l,r]
+2. one statement will be given like eg. count the total number of digit which is equal to 3 in each number between [l,r]
+3. range l,r will be very big like l<=r<= 1e9 or 1e15 or even 1e18...
+
+hence brute force that is using a simple for loop will give tle in such question hence we have to use Digit DP
+
+and also to solve such problem we solve it like the prefix sums
+that is
+
+solve(l,r) = solve(r) - solve(l-1);
+
+suppose l = 12345
+suppose r = 45678
+
+then 
+
+_ _ _ _ _
+
+what digit can we fill at first _
+0 
+1 
+2
+3
+4
+
+here {0,1,2,3} make group1 that is if we chose one of these we can put 0-9 in age ke dashes
+but {4} make group2 that is if i chose this then in age ke group i have to make group of next index to decide further means its creaitng the restriction....
+
+
+
+dp state will be defined by 
+
+if range limit max is 1e18 means it will have 19 digits so we will for safety take 20
+as first state 
+ dp[][][] -> dp[20][][]
+
+ now to tell group that which group we will put we will use a variable name as tight
+
+ dp[20][tight][]
+
+ hence these two states are compulsory now then we can add state accordingly to the questions
+
+ so in dp
+ first dimentsion will indicate index
+ 2nd dimenstion will indicate tight
+ 3rd dimentaiton will tell how many 3 appreard ...(accc to ques)..
+
+ tight will be of boolean if tight is true means ->restriction
+ if tight is false -> non restriction
+
+ that is if we put group 1 then we will in non restriction mode
+ but if we put group 2 (i,e last digit) we will be in restriction mode...
+
+# shuruat hmesa tight = true se hi hogi ... that is we will be in restriction mode...
+# also ek bar bhi agar tight false hua means hum non restriction mode mai agye fir hmesa tight false hi rhega that is hum non restriction mode mai hi rhenge
+
