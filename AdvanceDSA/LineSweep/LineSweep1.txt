@@ -1,0 +1,143 @@
+🚀 Line Sweep Technique — The Core Idea
+⭐ MOST IMPORTANT THING
+
+Convert a problem over intervals / ranges / events into ordered events on a line, then process them in sorted order while maintaining an active state.
+
+That’s it. Everything else is just implementation detail.
+
+🧠 When to Use Line Sweep (VERY IMPORTANT)
+
+Use Line Sweep when you see ANY of these patterns:
+
+🔹 1. Interval Problems
+
+Overlapping intervals
+
+Maximum overlaps at a point
+
+Minimum number of resources (rooms, platforms, servers)
+
+Examples:
+
+Meeting rooms
+
+Train platforms
+
+Overlapping segments
+
+Range add/remove queries
+
+🔹 2. “At any point in time” type questions
+
+Keywords:
+
+simultaneously
+
+at the same time
+
+maximum active
+
+how many are happening
+
+🔹 3. Geometry / Events on X or Time axis
+
+Rectangles overlapping
+
+Vertical / horizontal sweeps
+
+Queries like “how many points inside”
+
+🧩 How to Use Line Sweep (STEP-BY-STEP)
+Step 1️⃣: Convert intervals into events
+
+For interval [L, R]:
+
+Event	Meaning
+(L, +1)	interval starts
+(R, -1)	interval ends
+
+Sometimes end is (R+1, -1) depending on inclusiveness
+
+Step 2️⃣: Sort all events
+
+Sort by position
+
+If same position:
+
+start (+1) before end (-1) (VERY IMPORTANT)
+
+Step 3️⃣: Sweep left to right
+
+Maintain:
+
+active = current active intervals
+
+ans = max / min / required value
+
+active += event_value;
+ans = max(ans, active);
+
+🧪 Small Example (Classic)
+
+Intervals:
+
+[1,3], [2,5], [4,6]
+
+
+Events:
+
+(1,+1)
+(2,+1)
+(3,-1)
+(4,+1)
+(5,-1)
+(6,-1)
+
+
+Sweep:
+
+pos=1 → active=1
+pos=2 → active=2  ⭐ max overlap
+pos=3 → active=1
+pos=4 → active=2
+...
+
+
+Answer = 2
+
+⚠️ Most Common Mistakes (EXAM GOLD)
+❌ Wrong event ordering
+
+If two events at same point:
+
+start (+1) BEFORE end (-1)
+
+
+Otherwise answer breaks.
+
+❌ Inclusiveness confusion
+
+Closed interval [L, R]
+
+Half open [L, R)
+
+👉 Decide clearly before coding.
+
+🏆 Time & Space Complexity
+Metric	Value
+Time	O(N log N) (sorting events)
+Space	O(N)
+
+Much faster than brute force O(N²).
+
+🧠 Mental Checklist (Before Applying Line Sweep)
+
+Ask yourself:
+
+Can I convert this to start/end events?
+
+Does order matter more than exact positions?
+
+Do I need max / count / overlap at any point?
+
+If YES → Line Sweep 💯
